@@ -20,6 +20,9 @@ tasks:
 
   fourtht:
     run: fourth
+    inputs: "{$.Tasks.secondt.Output}"
+    requires:
+    - secondt
 
   fiftht:
     run: fifth
