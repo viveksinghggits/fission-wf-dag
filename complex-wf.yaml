@@ -1,0 +1,28 @@
+apiVersion: 1
+output: sixtht 
+tasks:
+  secondt:
+    run: second
+
+  thirdt:
+    run: third
+    inputs: "{$.Tasks.secondt.Output}"
+    requires:
+    - secondt
+
+
+  fourtht:
+    run: fourth
+
+  fiftht:
+    run: fifth
+    inputs: "{$.Tasks.thirdt.Output}"
+    requires:
+    - thirdt
+    - fourtht
+
+  sixtht:
+    run: sixth
+    inputs: "{$.Tasks.fiftht.Output}"
+    requires:
+    - fiftht
