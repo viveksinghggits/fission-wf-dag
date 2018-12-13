@@ -3,11 +3,12 @@
 package main
 
 import (
-    "net/http"
+	"net/http"
 )
 
 // Handler is the entry point for this fission function
 func Handler(w http.ResponseWriter, r *http.Request) {
-    msg := "First Hello, world!\n"
-    w.Write([]byte(msg))
+	msg := "Hello, world!\n"
+	w.Header().Set("Parent", "First")
+	w.Write([]byte(msg))
 }

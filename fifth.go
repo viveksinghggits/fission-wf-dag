@@ -3,20 +3,21 @@
 package main
 
 import (
-    "net/http"
-"io/ioutil"
+	"io/ioutil"
+	"net/http"
 )
 
 // Handler is the entry point for this fission function
 func Handler(w http.ResponseWriter, r *http.Request) {
 	reqBody, err := ioutil.ReadAll(r.Body)
-    if err != nil {
-        w.WriteHeader(http.StatusBadRequest)
-        w.Write([]byte(err.Error()))
-    }
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
+	}
 
-    body := string(reqBody)
-    finalres:=body+"fifth funciton\n"
-
-    w.Write([]byte(finalres))
+	parent := r.Header.Get("Parent")
+	body := string(reqBody)
+	finalres := body + " " + parent + "\n"
+	w.Header().Set("Parent", "Fifth")
+	w.Write([]byte(finalres))
 }
